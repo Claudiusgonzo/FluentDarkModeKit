@@ -35,10 +35,6 @@ typedef NS_ENUM(NSInteger, DMUserInterfaceStyle) {
 + (void)registerWithViewController:(UIViewController *)viewController syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
 + (void)unregister;
 
-// MARK: - Swizzling
-// TODO: move swizzling to private header
-+ (void)swizzleUIScreenTraitCollectionDidChange API_AVAILABLE(ios(13.0));
-
 @end
 
 #pragma mark - DMTraitEnvironment
@@ -46,12 +42,6 @@ typedef NS_ENUM(NSInteger, DMUserInterfaceStyle) {
 @protocol DMTraitEnvironment <NSObject>
 
 - (void)dmTraitCollectionDidChange:(nullable DMTraitCollection *)previousTraitCollection;
-
-@end
-
-@interface NSObject (DMTraitEnvironment)
-
-+ (void)swizzleTraitCollectionDidChangeToDMTraitCollectionDidChange API_AVAILABLE(ios(13.0));
 
 @end
 

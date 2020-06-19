@@ -8,6 +8,8 @@ import UIKit
 @_exported import DarkModeCore
 #endif
 
+import DarkModeCorePrivate
+
 public final class DarkModeManager: NSObject {
   private static var swizzlingConfigured = false
 

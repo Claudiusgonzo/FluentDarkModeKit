@@ -5,10 +5,12 @@
 
 #import "DMTraitCollection.h"
 #import "UIView+DarkModeKit.h"
+#import "NSObject+DarkModeKitSwizzling.h"
+#import "DMTraitCollection+DarkModeKitSwizzling.h"
 
 @import ObjectiveC;
 
-@implementation NSObject (DMTraitEnvironment)
+@implementation NSObject (DarkModeKitSwizzling)
 
 + (void)swizzleTraitCollectionDidChangeToDMTraitCollectionDidChange {
   [self swizzleTraitCollectionDidChangeToDMTraitCollectionDidChangeWithBlock:nil];
@@ -242,7 +244,10 @@ static BOOL _isObservingNewWindowAddNotification = NO;
   }
 }
 
-// MARK: - Swizzling
+@end
+
+@implementation DMTraitCollection (DarkModeKitSwizzling)
+
 + (void)swizzleUIScreenTraitCollectionDidChange {
   static dispatch_once_t onceToken;
   __weak typeof(self) weakSelf = self;
