@@ -185,7 +185,7 @@ static BOOL _isObservingNewWindowAddNotification = NO;
 }
 
 // MARK: - Observer Registration
-+ (void)registerWithApplication:(UIApplication *)application syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated {
++ (void)registerWithApplication:(UIApplication *)application themeChangedHandler:(void (^)(void))handler syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated {
   __weak UIApplication *weakApp = application;
   __weak typeof(self) weakSelf = self;
   _userInterfaceStyleChangeHandler = ^(DMTraitCollection *traitCollection, BOOL animated) {
@@ -194,6 +194,8 @@ static BOOL _isObservingNewWindowAddNotification = NO;
       return;
 
     [weakSelf updateUIWithViews:strongApp.windows viewControllers:nil traitCollection:traitCollection animated:animated];
+    if (handler)
+      handler();
   };
 
   [self observeNewWindowNotificationIfNeeded];
@@ -202,7 +204,7 @@ static BOOL _isObservingNewWindowAddNotification = NO;
     [self syncImmediatelyAnimated:animated];
 }
 
-+ (void)registerWithViewController:(UIViewController *)viewController syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated {
++ (void)registerWithViewController:(UIViewController *)viewController themeChangedHandler:(void (^)(void))handler syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated {
   __weak UIViewController *weakVc = viewController;
   __weak typeof(self) weakSelf = self;
   _userInterfaceStyleChangeHandler = ^(DMTraitCollection *traitCollection, BOOL animated) {
@@ -211,6 +213,8 @@ static BOOL _isObservingNewWindowAddNotification = NO;
       return;
 
     [weakSelf updateUIWithViews:nil viewControllers:[NSArray arrayWithObject:strongVc] traitCollection:traitCollection animated:animated];
+    if (handler)
+      handler();
   };
 
   if (syncImmediately)

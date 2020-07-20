@@ -11,14 +11,14 @@ import UIKit
 public final class DarkModeManager: NSObject {
   private static var swizzlingConfigured = false
 
-  public class func register(with application: UIApplication, useUIImageAsset: Bool, syncImmediately: Bool = false, animated: Bool = false) {
+  public class func register(with application: UIApplication, useUIImageAsset: Bool, syncImmediately: Bool = false, animated: Bool = false, themeChangedHandler: (() -> Void)? = nil) {
     commonSetup(useUIImageAsset)
-    DMTraitCollection.register(with: application, syncImmediately: syncImmediately, animated: animated)
+    DMTraitCollection.register(with: application, themeChangedHandler: themeChangedHandler, syncImmediately: syncImmediately, animated: animated)
   }
 
-  public class func register(with viewController: UIViewController, useUIImageAsset: Bool, syncImmediately: Bool = false, animated: Bool = false) {
+  public class func register(with viewController: UIViewController, useUIImageAsset: Bool, syncImmediately: Bool = false, animated: Bool = false, themeChangedHandler: (() -> Void)? = nil) {
     commonSetup(useUIImageAsset)
-    DMTraitCollection.register(with: viewController, syncImmediately: syncImmediately, animated: animated)
+    DMTraitCollection.register(with: viewController, themeChangedHandler: themeChangedHandler, syncImmediately: syncImmediately, animated: animated)
   }
 
   public class func unregister() {

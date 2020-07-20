@@ -31,8 +31,8 @@ typedef NS_ENUM(NSInteger, DMUserInterfaceStyle) {
 + (void)setOverrideTraitCollection:(DMTraitCollection *)overrideTraitCollection animated:(BOOL)animated;
 
 // MARK: - Observer Registration
-+ (void)registerWithApplication:(UIApplication *)application syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
-+ (void)registerWithViewController:(UIViewController *)viewController syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
++ (void)registerWithApplication:(UIApplication *)application themeChangedHandler:(nullable void (^)(void))handler syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
++ (void)registerWithViewController:(UIViewController *)viewController themeChangedHandler:(nullable void (^)(void))handler syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
 + (void)unregister;
 
 // MARK: - Setup
