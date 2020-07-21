@@ -6,9 +6,8 @@
 import UIKit
 #if SWIFT_PACKAGE
 @_exported import DarkModeCore
+@_implementationOnly import DarkModeCorePrivate
 #endif
-
-import DarkModeCorePrivate
 
 public final class DarkModeManager: NSObject {
   private static var swizzlingConfigured = false
